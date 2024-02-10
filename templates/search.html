@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
+</head>
+<body>
+    <div class="container">
+        <h1>Search Results</h1>
+        <div class="results">
+            <!-- Display search results here -->
+            <p>Showing results for: {{title}}</p>
+            <!-- Example result -->
+            <div class="result">
+                <h2>Title: {{title}}</h2>
+                <div class="movie">
+                    <img src={{image_link}} alt="Movie Poster">
+                    <div class="movie-info">
+                        <h2>{{title}}</h2>
+                        <p>{{description}}</p>
+                        <button onclick="showDetails()">Details</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h2>Recommendations based on similar Genre</h2>
+        <section id="movie-list">
+            <div class="movie">
+                <img src={{image_link1}} alt="Movie Poster">
+                <div class="movie-info">
+                    <h2>{{suggestion1}}</h2>
+                    <p>{{description1}}</p>
+                    <button onclick="showDetails()">Details</button>
+                </div>
+            </div>
+
+            <div class="movie">
+                <img src={{image_link2}} alt="Movie Poster">
+                <div class="movie-info">
+                    <h2>{{suggestion2}}</h2>
+                    <p>{{description2}}</p>
+                    <button onclick="showDetails()">Details</button>
+                </div>
+            </div>
+
+            <div class="movie">
+                <img src={{image_link3}} alt="Movie Poster">
+                <div class="movie-info">
+                    <h2>{{suggestion3}}</h2>
+                    <p>{{description3}}</p>
+                    <button onclick="showDetails()">Details</button>
+                </div>
+            </div>
+
+            <div class="movie">
+                <img src={{image_link4}} alt="Movie Poster">
+                <div class="movie-info">
+                    <h2>{{suggestion4}}</h2>
+                    <p>{{description4}}</p>
+                    <button onclick="showDetails()">Details</button>
+                </div>
+            </div>
+
+            <div class="movie">
+                <img src={{image_link5}} alt="Movie Poster">
+                <div class="movie-info">
+                    <h2>{{suggestion5}}</h2>
+                    <p>{{description5}}</p>
+                    <button onclick="showDetails()">Details</button>
+                </div>
+            </div>
+
+        </section>
+        <br>
+        <h2>Recommendations from the same Director</h2>
+        <section id="movie-list1">
+            <div class="movie">
+                <img src={{image_link6}} alt="Movie Poster">
+                <div class="movie-info">
+                    <h2>{{suggestion6}}</h2>
+                    <p>{{description6}}</p>
+                    <button onclick="showDetails()">Details</button>
+                </div>
+            </div>
+
+            <div class="movie">
+                <img src={{image_link7}} alt="Movie Poster">
+                <div class="movie-info">
+                    <h2>{{suggestion7}}</h2>
+                    <p>{{description7}}</p>
+                    <button onclick="showDetails()">Details</button>
+                </div>
+            </div>
+
+            <div class="movie">
+                <img src={{image_link8}} alt="Movie Poster">
+                <div class="movie-info">
+                    <h2>{{suggestion8}}</h2>
+                    <p>{{description8}}</p>
+                    <button onclick="showDetails()">Details</button>
+                </div>
+            </div>
+        </section>
+        <br>
+        <h2>Recommendations based on similar User ratings</h2>
+        <section id="movie-list2">
+            <div class="movie">
+                <img src={{image_link11}} alt="Movie Poster">
+                <div class="movie-info">
+                    <h2>{{suggestion11}}</h2>
+                    <p>{{description11}}</p>
+                    <button onclick="showDetails()">Details</button>
+                </div>
+            </div>
+
+            <div class="movie">
+                <img src={{image_link12}} alt="Movie Poster">
+                <div class="movie-info">
+                    <h2>{{suggestion12}}</h2>
+                    <p>{{description12}}</p>
+                    <button onclick="showDetails()">Details</button>
+                </div>
+            </div>
+
+            <div class="movie">
+                <img src={{image_link13}} alt="Movie Poster">
+                <div class="movie-info">
+                    <h2>{{suggestion13}}</h2>
+                    <p>{{description13}}</p>
+                    <button onclick="showDetails()">Details</button>
+                </div>
+            </div>
+
+            <div class="movie">
+                <img src={{image_link14}} alt="Movie Poster">
+                <div class="movie-info">
+                    <h2>{{suggestion14}}</h2>
+                    <p>{{description14}}</p>
+                    <button onclick="showDetails()">Details</button>
+                </div>
+            </div>
+
+            <div class="movie">
+                <img src={{image_link15}} alt="Movie Poster">
+                <div class="movie-info">
+                    <h2>{{suggestion15}}</h2>
+                    <p>{{description15}}</p>
+                    <button onclick="showDetails()">Details</button>
+                </div>
+            </div>
+
+        </section>
+        <br>
+
+    <footer>
+        <p>&copy; 2024 Movie Recommendations</p>
+    </footer>
+    </div>
+</body>
+</html>

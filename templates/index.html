@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search and Recommendation Website</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to our Search and Recommendation Website</h1>
+        <form action="/search" method="POST">
+            <input type="text" name="movie" placeholder="Search..." required>
+            <button type="submit">Search</button>
+        </form>
+        <main>
+            <section id="movie-list">
+                <div class="movie">
+                    <img src={{image_link}} alt="Movie Poster">
+                    <div class="movie-info">
+                        <h2>{{title1}}</h2>
+                        <p>{{description1}}</p>
+                        <button onclick="showDetails()">Details</button>
+                    </div>
+                </div>
+
+                <div class="movie">
+                    <img src={{image_link1}} alt="Movie Poster">
+                    <div class="movie-info">
+                        <h2>{{title2}}</h2>
+                        <p>{{description2}}</p>
+                        <button onclick="showDetails()">Details</button>
+                    </div>
+                </div>
+
+                <div class="movie">
+                    <img src={{image_link3}} alt="Movie Poster">
+                    <div class="movie-info">
+                        <h2>{{title3}}</h2>
+                        <p>{{description3}}</p>
+                        <button onclick="showDetails()">Details</button>
+                    </div>
+                </div>
+
+                <div class="movie">
+                    <img src={{image_link4}} alt="Movie Poster">
+                    <div class="movie-info">
+                        <h2>{{title4}}</h2>
+                        <p>{{description4}}</p>
+                        <button onclick="showDetails()">Details</button>
+                    </div>
+                </div>
+
+                <div class="movie">
+                    <img src={{image_link5}} alt="Movie Poster">
+                    <div class="movie-info">
+                        <h2>{{title5}}</h2>
+                        <p>{{description5}}</p>
+                        <button onclick="showDetails()">Details</button>
+                    </div>
+                </div>
+
+                <!-- Add more movies here -->
+            </section>
+
+            <section id="details" class="hidden">
+                <h2>Movie Details</h2>
+                <img src="https://via.placeholder.com/150" alt="Movie Poster">
+                <h3>Title</h3>
+                <p>Description</p>
+                <p>Release Date: </p>
+                <button onclick="hideDetails()">Close</button>
+            </section>
+            <br>
+            <br>
+            <br>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 Movie Recommendations</p>
+        </footer>
+
+        <script>
+            function showDetails() {
+                document.getElementById("details").classList.remove("hidden");
+            }
+
+            function hideDetails() {
+                document.getElementById("details").classList.add("hidden");
+            }
+
+            function searchMovies() {
+                var input, filter, movies, movie, title, i;
+                input = document.getElementById("search");
+                filter = input.value.toUpperCase();
+                movies = document.getElementById("movie-list").getElementsByClassName("movie");
+                for (i = 0; i < movies.length; i++) {
+                    title = movies[i].getElementsByClassName("movie-info")[0].getElementsByTagName("h2")[0];
+                    if (title.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        movies[i].style.display = "";
+                    } else {
+                        movies[i].style.display = "none";
+                    }
+                }
+            }
+        </script>
+    </div>
+</body>
+</html>
