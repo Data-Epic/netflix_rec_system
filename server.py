@@ -1,3 +1,6 @@
+# pylint: disable=missing-module-docstring
+# pylint: disable=missing-class-docstring
+# pylint: disable=missing-function-docstring
 from flask import Flask, render_template, request
 from app import suggestions, search_movie, random_movies, director, user_rating
 
@@ -75,8 +78,7 @@ def search_page():
                                description14=user[3][9],
                                suggestion15=user[4][2],
                                image_link15=user[4][10],
-                               description15=user[4][9],
-                               )
+                               description15=user[4][9])
 
 
 # @app.route('/NotFound', methods=['POST'])

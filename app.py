@@ -1,5 +1,6 @@
-import psycopg2
+# pylint: disable=missing-module-docstring
 import os
+import psycopg2
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -15,13 +16,17 @@ con = psycopg2.connect(
     user=db_user,
     password=db_password,
     host=host,
-    port=port
-) 
+    port=port)
 
 cursor = con.cursor()
 
 
 def search_movie(movie_name):
+    """
+    This function is used to search for movies in the database
+    :param movie_name: This expects the name of desired movie
+    :return:
+    """
     cursor.execute(f"SELECT * FROM movies WHERE title ~ '\m{movie_name.title()}'")
     columns = []
     for column in cursor.description:
@@ -36,7 +41,13 @@ def search_movie(movie_name):
 
 
 def suggestions(movies):
-    cursor.execute(f"SELECT * FROM movies WHERE genre = '{movies['genre']}' ORDER BY random() LIMIT 5")
+    """
+    This function is used to generate suggestions based on similar genres
+    :param movies: This expects a dict of movie details
+    :return:
+    """
+    cursor.execute(f"SELECT * FROM movies WHERE genre = "
+                   f"'{movies['genre']}' ORDER BY random() LIMIT 5")
     columns = []
     for column in cursor.description:
         columns.append(column[0].lower())
@@ -47,6 +58,10 @@ def suggestions(movies):
 
 
 def random_movies():
+    """
+    This function is used to generate random movies from the database
+    :return:
+    """
     cursor.execute("SELECT * FROM movies WHERE ratings > 2.5 ORDER BY random() LIMIT 5")
     columns = []
     for column in cursor.description:
@@ -58,6 +73,11 @@ def random_movies():
 
 
 def director(movies):
+    """
+    This function is used to generate suggestions based on the director
+    :param movies: This expects a dict of movie details
+    :return:
+    """
     cursor.execute(f"SELECT * FROM movies WHERE director = '{movies['director']}' ORDER BY random() LIMIT 5")
     columns = []
     for column in cursor.description:
@@ -69,6 +89,11 @@ def director(movies):
 
 
 def user_rating(movies):
+    """
+    This function is used to generate suggestions based on similar user ratings
+    :param movies: This expects a dict of movie details
+    :return:
+    """
     cursor.execute(f"SELECT * FROM movies WHERE ratings > '{movies['ratings']}' ORDER BY random() LIMIT 5")
     columns = []
     for column in cursor.description:

@@ -1,14 +1,18 @@
+# pylint: disable=missing-module-docstring
+# pylint: disable=missing-class-docstring
+# pylint: disable=missing-function-docstring
 import os
-import psycopg2
 import logging
+import psycopg2
+import numpy as np
 import pandas as pd
 import pyarrow
-from netflix_rec_system.exceptions import (ConnectToDatabaseError, CreateTableError, DataValidationError, InsertError,
-                                           FileNotFound)
 from dotenv import load_dotenv
+from exceptions import (ConnectToDatabaseError, CreateTableError, DataValidationError,
+                        InsertError, FileNotFound)
 
 load_dotenv()
-datas = "cleaned_movie_data.csv"
+DATA = "cleaned_movie_data.csv"
 
 
 class DBUtility:
@@ -60,7 +64,7 @@ class DBUtility:
         title VARCHAR(150) NOT NULL,
         year INTEGER,
         rated VARCHAR(10),
-        runtime VARCHAR(10),
+        runtime INTEGER,
         genre VARCHAR(200),
         director VARCHAR(100),
         actors VARCHAR(200),
@@ -93,30 +97,34 @@ class DBUtility:
             raise CreateTableError("cannot create table") from e
 
     def data_type_validation(self) -> None:
+        """
+        This function validated the data type.
+        :return:
+        """
+        data_types = {
+            'movieId': np.int64,
+            'Title': str,
+            'Year': np.int64,
+            'Rated': str,
+            'Runtime': np.int64,
+            'Director': str,
+            'Actors': str,
+            'Plot': str,
+            'Poster': str,
+            'Language': str,
+            'Country': str,
+            'imdbRating': np.float64,
+            'Type': str,
+            'Genres': str,
+            'userId': np.int64,
+            'rating': np.float64
+        }
         for num in range(len(self.df)):
-            data_types = {
-                'movieId': int,
-                'Title': str,
-                'Year': int,
-                'Rated': str,
-                'Runtime': str,
-                'Director': str,
-                'Actors': str,
-                'Plot': str,
-                'Poster': str,
-                'Language': str,
-                'Country': str,
-                'imdbRating': float,
-                'Type': str,
-                'Genre': str,
-                'userId': int,
-                'rating': float
-            }
-            # self.df['movieId'][0] = int(self.df['movieId'][0])
             if all(isinstance(self.df[col][num], data_type) for col, data_type in data_types.items()):
                 logging.info('Data type validated')
             else:
-                logging.info(f'Failed in {self.df.iloc[num]}')
+                # logging.info("Failed in %s", self.df.iloc[num])
+                print(f"Failed in: \n{self.df.iloc[num]}")
                 raise DataValidationError('Data type validation failed')
 
     def insert(self) -> None:
@@ -138,23 +146,25 @@ class DBUtility:
                                  f"{self.df['rating'][num]}", f"{self.df['Type'][num]}")
                 # create cursor object
                 cursor = self.connection.cursor()
-                if (self.df['movieId'][num] is not None or
-                        self.df['Title'][num] is not None or
-                        self.df['Year'][num] is not None or
-                        self.df['Rated'][num] is not None or
-                        self.df['Runtime'][num] is not None or
-                        self.df['Director'][num] is not None or
-                        self.df['Actors'][num] is not None or
-                        self.df['Plot'][num] is not None or
-                        self.df['Poster'][num] is not None or
-                        self.df['Language'][num] is not None or
-                        self.df['Country'][num] is not None or
-                        self.df['imdbRating'][num] is not None or
-                        self.df['Type'][num] is not None or
-                        self.df['Genres'][num] is not None or
-                        self.df['userId'][num] is not None or
-                        self.df['rating'][num] is not None):
-                    # execute raw query
+                data_input = {
+                    'movieId': None,
+                    'Title': None,
+                    'Year': None,
+                    'Rated': None,
+                    'Runtime': None,
+                    'Director': None,
+                    'Actors': None,
+                    'Plot': None,
+                    'Poster': None,
+                    'Language': None,
+                    'Country': None,
+                    'imdbRating': None,
+                    'Type': None,
+                    'Genres': None,
+                    'userId': None,
+                    'rating': None
+                }
+                if all(isinstance(self.df[col][num] is not data) for col, data in data_input.items()):
                     cursor.execute(insert_script, insert_values)
                 else:
                     logging.info("No input detected")
@@ -172,8 +182,8 @@ class DBUtility:
 
 if __name__ == "__main__":
     db = DBUtility()
-    db.read_data(datas)
-    db.connect_to_database()
-    db.create_postgres_table()
+    db.read_data(DATA)
+    # db.connect_to_database()
+    # db.create_postgres_table()
     db.data_type_validation()
-    db.insert()
+    # db.insert()

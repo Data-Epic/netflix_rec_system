@@ -73,7 +73,7 @@ def test_insert(db_utility):
                               'Genres': ['Action', 'Drama', 'Comedy'], 'Year': [2020, 2021, 2022],
                               'Rated': ['PG', 'R', 'PG-13'], 'Runtime': ['120 min', '150 min', '90 min'],
                               # 'Director': ['Director1', 'Director2', 'Director3'],
-                              'Actors': ['Actor1, Actor2', 'Actor3, Actor4', 'Actor5, Actor6'],
+                              'Actors': ['Actor1, Actor2', 'Actor3, Actor4', None],
                               'Plot': ['Plot1', 'Plot2', 'Plot3'],
                               'Poster': ['poster1.jpg', 'poster2.jpg', 'poster3.jpg'],
                               'Language': ['English', 'Spanish', 'French'],
