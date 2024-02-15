@@ -7,9 +7,6 @@ import sys
 # SCRIPT_DIR = os.path.dirname(os.path.abspath('/Users/mac/PycharmProjects/netflix_recommendation_sys'
 #                                              '/netflix_rec_system/database_connection.py'))
 # sys.path.append(os.path.dirname(SCRIPT_DIR))
-BASE_PATH = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-EXTRACT_SH_PATH = os.path.join(BASE_PATH, 'database_connection.py')
-sys.path.insert(0, BASE_PATH)
 from database_connection import (DBUtility, FileNotFound, DataValidationError, InsertError)
 
 
