@@ -40,7 +40,7 @@ def search_movie(movie_name):
     return movies
 
 
-def suggestions(movies):
+def genre(movies):
     """
     This function is used to generate suggestions based on similar genres
     :param movies: This expects a dict of movie details
@@ -103,14 +103,3 @@ def user_rating(movies):
         movies1.append(row)
     return movies1
 
-
-# movie = search_movie('avenger')
-# sug = suggestions(movie)
-# rand = random_movies()
-# print(movie)
-# print(sug)
-# print(rand[0])
-# print(rand[1])
-# print(rand[2])
-# print(rand[3])
-# print(rand[4])
