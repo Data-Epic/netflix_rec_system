@@ -7,7 +7,7 @@ import sys
 # SCRIPT_DIR = os.path.dirname(os.path.abspath('/Users/mac/PycharmProjects/netflix_recommendation_sys'
 #                                              '/netflix_rec_system/database_connection.py'))
 # sys.path.append(os.path.dirname(SCRIPT_DIR))
-from https://github.com/Data-Epic/netflix_rec_system/blob/d6e7874bcb7a5bed92e7318fbb89a968298063b4/database_connection import (DBUtility, FileNotFound, DataValidationError, InsertError)
+from ..database_connection import (DBUtility, FileNotFound, DataValidationError, InsertError)
 
 
 @pytest.fixture
