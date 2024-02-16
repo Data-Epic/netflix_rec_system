@@ -3,8 +3,7 @@ import pytest
 import pandas as pd
 import sys
 
-SCRIPT_DIR = os.path.dirname(os.path.abspath('/Users/mac/PycharmProjects/netflix_recommendation_sys'
-                                             '/netflix_rec_system/database_connection.py'))
+SCRIPT_DIR = os.path.dirname(os.path.abspath('database_connection.py'))
 sys.path.append(os.path.dirname(SCRIPT_DIR))
 from netflix_rec_system.database_connection import (DBUtility, FileNotFound, DataValidationError, InsertError)
 
