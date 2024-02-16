@@ -4,7 +4,7 @@ import psycopg2
 import pandas as pd
 from joblib import load
 from dotenv import load_dotenv
-from model_building.model_classes import MatrixFactorization,ContentBased,HybridRecommender
+from model_building.model_classes import MatrixFactorization,ContentBased,HybridRecommender,movie_data_comb1,train_df
 
 load_dotenv()
 
@@ -13,6 +13,13 @@ db_password = os.environ.get("DB_PASSWORD")
 db_name = os.environ.get("DB_NAME")
 host = os.environ.get("HOST")
 port = os.environ.get("PORT")
+
+collaborative_model = load("model_building/collaborative_model.joblib")
+content_model = load("model_building/content_model.joblib")
+hybrid_recommender = HybridRecommender(content_model, collaborative_model)
+
+
+
 
 con = psycopg2.connect(
     dbname=db_name,
@@ -42,6 +49,9 @@ def search_movie(movie_name):
                 movies[columns[i]] = row[i].strip().lower()
     return movies
 
+def recommend_movies(userId,movies_liked):
+    movie_list = hybrid_recommender.recommend(userId, movies_liked)
+    return movie_list
 
 def genre(movies):
     """
@@ -49,6 +59,7 @@ def genre(movies):
     :param movies: This expects a dict of movie details
     :return:
     """
+
     cursor.execute(f"SELECT * FROM movies WHERE genre = "
                    f"'{movies['genre']}' ORDER BY random() LIMIT 5")
     columns = []
@@ -60,19 +71,24 @@ def genre(movies):
     return movies1
 
 
-# def random_movies():
-#     """
-#     This function is used to generate random movies from the database
-#     :return:
-#     """
-#     cursor.execute("SELECT * FROM movies WHERE ratings > 2.5 ORDER BY random() LIMIT 5")
-#     columns = []
-#     for column in cursor.description:
-#         columns.append(column[0].lower())
-#     random = []
-#     for row in cursor:
-#         random.append(row)
-#     return random
+def get_movies(movie_list):
+    """
+    This function is used to generate random movies from the database
+    :return:
+    """
+    random = []
+    columns = []
+    print(movie_list)
+    for movies in movie_list:
+        movies = movies.lower()
+        id_ = train_df.loc[train_df['Title'] == movies,'movieId'].values[0]
+        movies = movie_data_comb1.loc[movie_data_comb1['movieId'] == id_,'Title'].values[0]
+        cursor.execute(f"SELECT * FROM movies WHERE title='{movies}' LIMIT 1")
+        for column in cursor.description:
+            columns.append(column[0].lower())
+        for row in cursor:
+            random.append(row)
+    return random
 
 
 def director(movies):
@@ -124,7 +140,7 @@ def user_rating(movies):
 # user_id = 9
 # movie_user_likes='v for vendetta'
 #
-# hybrid_recommender = Hyb ridRecommender(content_model, collaborative_model)
+# hybrid_recommender = HybridRecommender(content_model, collaborative_model)
 #
 # print(f"collaborative: {collaborative_model.predict(9,10)}")
 # print(f"content: {content_model.predict('v for vendetta')}")
@@ -132,4 +148,5 @@ def user_rating(movies):
 
 
 if __name__ == "__main__":
-    print(search_movie('Avatar'))
+    movie_list = recommend_movies(9,"avatar")
+    print(get_movies(movie_list)[0])
