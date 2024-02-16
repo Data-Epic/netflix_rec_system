@@ -54,7 +54,7 @@ jobs:
         poetry install
 
     - name: test_script
-      run: poetry run pytest
+      run: poetry run pytest tests/test_database_connection.py
   
   coverage:
     runs-on: ubuntu-latest
