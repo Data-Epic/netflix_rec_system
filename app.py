@@ -19,8 +19,6 @@ content_model = load("model_building/content_model.joblib")
 hybrid_recommender = HybridRecommender(content_model, collaborative_model)
 
 
-
-
 con = psycopg2.connect(
     dbname=db_name,
     user=db_user,
@@ -78,7 +76,6 @@ def get_movies(movie_list):
     """
     random = []
     columns = []
-    print(movie_list)
     for movies in movie_list:
         movies = movies.lower()
         id_ = train_df.loc[train_df['Title'] == movies,'movieId'].values[0]

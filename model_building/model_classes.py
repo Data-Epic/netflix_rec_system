@@ -5,8 +5,8 @@ from joblib import load
 import matplotlib.pyplot as plt
 
 movie_data_comb1 = pd.read_csv("cleaned_movie_data.csv")
-user_id = 9
-movie_user_likes='v for vendetta'
+# user_id = 9
+# movie_user_likes='v for vendetta'
 train_df = movie_data_comb1.drop(columns=['userId','rating']).drop_duplicates().reset_index(drop=True)
 train_df['Title'] = train_df['Title'].apply(lambda x: x.lower())
 
