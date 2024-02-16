@@ -41,11 +41,11 @@ class DBUtility:
         """
         try:
             self.connection = psycopg2.connect(
-                dbname=db_name,
-                user=db_user,
-                password=db_password,
-                host=host,
-                port=port
+                dbname=DB_NAME,
+                user=DB_USER,
+                password=DB_PASSWORD,
+                host=HOST,
+                port=PORT
             )
             logging.info("connected to postgres database successfully")
 
