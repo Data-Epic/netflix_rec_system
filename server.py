@@ -2,7 +2,7 @@
 # pylint: disable=missing-class-docstring
 # pylint: disable=missing-function-docstring
 from flask import Flask, render_template, request
-from app import suggestions, search_movie, random_movies, director, user_rating
+from app import genre, search_movie, director, user_rating
 
 app = Flask(__name__)
 
@@ -26,6 +26,11 @@ def open_app():
                            title5=movie[4][2],
                            description5=movie[4][9],
                            image_link5=movie[4][10])
+
+@app.route('/login',methods=['POST','GET'])
+def login_credential():
+    if request.method == 'POST':
+        userId = request.form[]
 
 
 @app.route('/search', methods=['POST'])
