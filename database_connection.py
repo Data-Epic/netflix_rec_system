@@ -13,15 +13,14 @@ from netflix_rec_system.exceptions import (ConnectToDatabaseError, CreateTableEr
 
 load_dotenv()
 DATA = "cleaned_movie_data.csv"
-
+db_user = os.environ.get("DB_USER")
+db_password = os.environ.get("DB_PASSWORD")
+db_name = os.environ.get("DB_NAME")
+host = os.environ.get("HOST")
+port = os.environ.get("PORT")
 
 class DBUtility:
     def __init__(self) -> None:
-        self.db_user = os.environ.get("DB_USER")
-        self.db_password = os.environ.get("DB_PASSWORD")
-        self.db_name = os.environ.get("DB_NAME")
-        self.host = os.environ.get("HOST")
-        self.port = os.environ.get("PORT")
         self.connection = None
         self.df = None
 
@@ -42,11 +41,11 @@ class DBUtility:
         """
         try:
             self.connection = psycopg2.connect(
-                dbname=self.db_name,
-                user=self.db_user,
-                password=self.db_password,
-                host=self.host,
-                port=self.port
+                dbname=db_name,
+                user=db_user,
+                password=db_password,
+                host=host,
+                port=port
             )
             logging.info("connected to postgres database successfully")
 
