@@ -10,11 +10,11 @@ on:
     branches: [ "main" ]
 
 env:
-  db_user: ${{ secrets.DB_USER }}
-  db_password: ${{ secrets.DB_PASSWORD }}
-  db_name: ${{ secrets.DB_NAME }}
-  host: ${{ secrets.HOST }}
-  port: ${{ secrets.PORT }}
+  self.db_user: ${{ secrets.DB_USER }}
+  self.db_password: ${{ secrets.DB_PASSWORD }}
+  self.db_name: ${{ secrets.DB_NAME }}
+  self.host: ${{ secrets.HOST }}
+  self.port: ${{ secrets.PORT }}
   
 
 jobs:
