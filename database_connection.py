@@ -13,11 +13,11 @@ from netflix_rec_system.exceptions import (ConnectToDatabaseError, CreateTableEr
 
 load_dotenv()
 DATA = "cleaned_movie_data.csv"
-db_user = os.environ.get("DB_USER")
-db_password = os.environ.get("DB_PASSWORD")
-db_name = os.environ.get("DB_NAME")
-host = os.environ.get("HOST")
-port = os.environ.get("PORT")
+DB_USER = os.environ.get("DB_USER")
+DB_PASSWORD = os.environ.get("DB_PASSWORD")
+DB_NAME = os.environ.get("DB_NAME")
+HOST = os.environ.get("HOST")
+PORT = os.environ.get("PORT")
 
 class DBUtility:
     def __init__(self) -> None:
