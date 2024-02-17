@@ -9,6 +9,7 @@
 <body>
     <div class="container">
         <h1>Welcome to our Search and Recommendation Website</h1>
+            <a href="/server"> <button type="button">login</button></a>
         <form action="/search" method="POST">
             <input type="text" name="movie" placeholder="Search..." required>
             <button type="submit">Search</button>
@@ -61,15 +62,6 @@
                 </div>
 
                 <!-- Add more movies here -->
-            </section>
-
-            <section id="details" class="hidden">
-                <h2>Movie Details</h2>
-                <img src="https://via.placeholder.com/150" alt="Movie Poster">
-                <h3>Title</h3>
-                <p>Description</p>
-                <p>Release Date: </p>
-                <button onclick="hideDetails()">Close</button>
             </section>
             <br>
             <br>

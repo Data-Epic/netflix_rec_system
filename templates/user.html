@@ -3,33 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Results</title>
+    <title>User Login</title>
     <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
 </head>
 <body>
     <div class="container">
-        <h1>Search Results</h1>
+        <h1>Welcome back! {{userId}}</h1>
         <form action="/search" method="POST">
             <input type="text" name="movie" placeholder="Search..." required>
             <button type="submit">Search</button>
         </form>
-        <div class="results">
-            <!-- Display search results here -->
-            <p>Showing results for: {{title}}</p>
-            <!-- Example result -->
-            <div class="result">
-                <h2>Title: {{title}}</h2>
-                <div class="movie">
-                    <img src={{image_link}} alt="Movie Poster">
-                    <div class="movie-info">
-                        <h2>{{title}}</h2>
-                        <p>{{description}}</p>
-                        <button onclick="showDetails()">Details</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <h2>More Like this:</h2>
+        <h2>Recommendations for you</h2>
         <section id="movie-list">
             <div class="movie">
                 <img src={{image_link1}} alt="Movie Poster">
@@ -74,34 +58,8 @@
                     <p>{{description5}}</p>
                     <button onclick="showDetails()">Details</button>
                 </div>
-            </div>
 
-            <div class="movie">
-                <img src={{image_link6}} alt="Movie Poster">
-                <div class="movie-info">
-                    <h2>{{suggestion6}}</h2>
-                    <p>{{description6}}</p>
-                    <button onclick="showDetails()">Details</button>
-                </div>
-            </div>
-
-            <div class="movie">
-                <img src={{image_link7}} alt="Movie Poster">
-                <div class="movie-info">
-                    <h2>{{suggestion7}}</h2>
-                    <p>{{description7}}</p>
-                    <button onclick="showDetails()">Details</button>
-                </div>
-            </div>
-
-            <div class="movie">
-                <img src={{image_link8}} alt="Movie Poster">
-                <div class="movie-info">
-                    <h2>{{suggestion8}}</h2>
-                    <p>{{description8}}</p>
-                    <button onclick="showDetails()">Details</button>
-                </div>
-            </div>
+        </section>
         <br>
         <br>
 

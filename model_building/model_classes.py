@@ -10,6 +10,7 @@ movie_data_comb1 = pd.read_csv("cleaned_movie_data.csv")
 train_df = movie_data_comb1.drop(columns=['userId','rating']).drop_duplicates().reset_index(drop=True)
 train_df['Title'] = train_df['Title'].apply(lambda x: x.lower())
 
+
 class MatrixFactorization(BaseEstimator, RegressorMixin):
     k = 20
     n_users = movie_data_comb1['userId'].nunique()

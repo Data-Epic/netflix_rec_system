@@ -6,7 +6,6 @@ import logging
 import psycopg2
 import numpy as np
 import pandas as pd
-import pyarrow
 from dotenv import load_dotenv
 from netflix_rec_system.exceptions import (ConnectToDatabaseError, CreateTableError, DataValidationError,
                         InsertError, FileNotFound)
